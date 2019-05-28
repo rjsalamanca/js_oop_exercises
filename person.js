@@ -21,7 +21,6 @@ class Person{
         }
 
         this.createGreeting = function(other){
-            console.log('created greeting')
             this.greeting = 'Yo ' + other.name + '! from ' + this.name + '.';
         }
 
@@ -31,6 +30,14 @@ class Person{
         
         this.lazyGreet = function(){
             setTimeout(() => { this.greet() },2000);
+        }
+
+        this.createGreetingsForFriends = function(){
+            let mainPerson = this;
+            this.friends.map(function(friend) {
+                mainPerson.createGreeting(friend)
+                mainPerson.greet();
+            });
         }
     }
 }
@@ -55,4 +62,16 @@ rj.greet();
 console.log('\n');
 
 //lazy greet
-rj.lazyGreet();
+// rj.lazyGreet();
+// console.log('\n');
+
+//create greeting for friends
+
+let alfie = new Person('Alfie'); 
+let anushka = new Person('Anushka'); 
+let henrique = new Person('Henrique'); 
+
+alfie.addFriend(anushka);
+alfie.addFriend(henrique); 
+
+alfie.createGreetingsForFriends(); 
