@@ -14,19 +14,24 @@ class Person{
     constructor (name){
         this.name = name;
         this.friends = [];
+        this.greeting = ''
 
         this.addFriend = function(friend){
             this.friends.push(friend);
         }
 
-        this.greet = function(other){
-            console.log('Yo ' + other.name + '! from ' + this.name + '.');
+        this.createGreeting = function(other){
+            console.log('created greeting')
+            this.greeting = 'Yo ' + other.name + '! from ' + this.name + '.';
         }
-    }
 
-
-    static greet(other){
-        console.log(this.createGreeting(other));
+        this.greet = function(){
+            console.log(this.greeting)
+        };
+        
+        this.lazyGreet = function(){
+            setTimeout(() => { this.greet() },2000);
+        }
     }
 }
 
@@ -42,5 +47,12 @@ console.log(rj.friends);
 rj.addFriend(eli.name);
 console.log(rj.friends + '\n');
 
-//greet
-rj.greet(eli);
+//create greeting
+rj.createGreeting(eli);
+
+//print greeting
+rj.greet();
+console.log('\n');
+
+//lazy greet
+rj.lazyGreet();
